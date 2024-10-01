@@ -1,35 +1,39 @@
 package employeemanagement;
 
+
+import employeemanagement.DAO.implimentation.EmployeDaoImpl;
 import employeemanagement.entities.Employee;
 import employeemanagement.util.HibernateUtil;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
 
-import java.util.UUID;
+import java.util.List;
+
 
 public class Main {
+
     public static void main(String[] args) {
-        // Ouvre une session Hibernate
-        Session session = HibernateUtil.getSessionFactory().openSession();
 
-        // Démarre une transaction
-        Transaction transaction = session.beginTransaction();
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
-        // Crée un employé pour tester
-        Employee emp = new Employee("John Doe", "john.doe@example.com", "IT", "Developer" ,"youcode");
 
-        // Sauvegarde l'employé dans la base de données
-        session.save(emp);
+        Session currentSession = sessionFactory.getCurrentSession();
 
-        // Commit la transaction
-        transaction.commit();
+        Session newSession = sessionFactory.openSession();
 
-        // Ferme la session
-        session.close();
 
-        System.out.println("Employee ajouté avec succès !");
+        EmployeDaoImpl employeDao = new EmployeDaoImpl();
 
-        // Fermer Hibernate
-        HibernateUtil.shutdown();
+        newSession.getTransaction().begin();
+        newSession.persist(employeDao);
+
+        newSession.getTransaction().commit();
+
+
+        Employee employee1 = new Employee("Employee_1", "employee_1@gmail.com", "0611122233", "Maths", "Professeur");
+        employeDao.saveEmploye(employee1);
+
     }
 }

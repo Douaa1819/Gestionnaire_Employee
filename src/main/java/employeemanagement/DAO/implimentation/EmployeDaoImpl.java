@@ -8,24 +8,28 @@ import org.hibernate.Transaction;
 import java.util.List;
 import java.util.ArrayList;
 
-public class EmployeDaoImpl implements EmployeDao {
+public class EmployeDaoImpl {
 
     private static final List <Employee> employes = new ArrayList<Employee>();
 
-    @Override
+
     public void saveEmploye(Employee employee) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
             session.save(employee);
             transaction.commit();
+            System.out.println("Employé enregistré : " + employee.getName());
         } catch (Exception e) {
             if (transaction != null) transaction.rollback();
+            System.err.println("Erreur lors de l'enregistrement de l'employé : " + e.getMessage());
             e.printStackTrace();
         }
     }
 
-    @Override
+
+
+
     public void updateEmployee(Employee employee) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
@@ -34,7 +38,7 @@ public class EmployeDaoImpl implements EmployeDao {
         session.close();
     }
 
-    @Override
+
     public void deleteEmployee(Employee employee) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
@@ -43,7 +47,7 @@ public class EmployeDaoImpl implements EmployeDao {
         session.close();
     }
 
-    @Override
+
     public List<Employee> getListEmployes() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return session.createQuery("from Employee", Employee.class).list();

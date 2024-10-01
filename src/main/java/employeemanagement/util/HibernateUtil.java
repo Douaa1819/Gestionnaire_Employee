@@ -1,28 +1,23 @@
 package employeemanagement.util;
-
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 public class HibernateUtil {
-    private static SessionFactory sessionFactory;
 
-    // Méthode pour obtenir l'instance unique de SessionFactory
-    public static SessionFactory getSessionFactory() {
-        if (sessionFactory == null) {
-            try {
-                // Crée une instance unique de SessionFactory à partir de la configuration
-                sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+    private static final SessionFactory sessionFactory = buildSessionFactory();
+
+    private static SessionFactory buildSessionFactory() {
+        try {
+            Configuration configuration = new Configuration();
+            configuration.configure("hibernate.cfg.xml");
+            return configuration.buildSessionFactory();
+        } catch (Throwable ex) {
+            throw new ExceptionInInitializerError(ex);
         }
-        return sessionFactory;
     }
 
-    // Méthode pour fermer la session factory lors de la fermeture de l'application
-    public static void shutdown() {
-        if (sessionFactory != null) {
-            sessionFactory.close();
-        }
+    public static SessionFactory getSessionFactory() {
+        return sessionFactory;
     }
 }
