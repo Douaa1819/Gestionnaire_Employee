@@ -2,10 +2,11 @@ package employeemanagement.DAO.implimentation;
 
 import employeemanagement.DAO.interfaces.EmployeDao;
 import employeemanagement.entities.Employee;
-
-import java.util.ArrayList;
+import employeemanagement.util.HibernateUtil;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import java.util.List;
-import java.util.UUID;
+import java.util.ArrayList;
 
 public class EmployeDaoImpl implements EmployeDao {
 
@@ -13,26 +14,40 @@ public class EmployeDaoImpl implements EmployeDao {
 
     @Override
     public void saveEmploye(Employee employee) {
-
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+            session.save(employee);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) transaction.rollback();
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void updateEmployee(Employee employee) {
-
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
+        session.update(employee);
+        transaction.commit();
+        session.close();
     }
 
     @Override
-    public void deleteEmployee(UUID id) {
-
+    public void deleteEmployee(Employee employee) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
+        session.delete(employee);
+        transaction.commit();
+        session.close();
     }
 
     @Override
     public List<Employee> getListEmployes() {
-        return List.of();
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            return session.createQuery("from Employee", Employee.class).list();
+        }
     }
 
-    @Override
-    public Employee getEmployee(UUID id) {
-        return null;
-    }
 }
