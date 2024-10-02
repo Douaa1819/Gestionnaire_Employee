@@ -1,5 +1,4 @@
-package employeemanagement.util;
-import org.hibernate.Session;
+package com.employeemanagement.util;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 

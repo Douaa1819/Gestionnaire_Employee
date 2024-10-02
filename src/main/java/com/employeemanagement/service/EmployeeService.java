@@ -1,6 +1,6 @@
-package employeemanagement.service;
-import employeemanagement.DAO.interfaces.EmployeDao;
-import employeemanagement.entities.Employee;
+package com.employeemanagement.service;
+import com.employeemanagement.DAO.EmployeDao;
+import com.employeemanagement.entities.Employee;
 
 import java.util.List;
 

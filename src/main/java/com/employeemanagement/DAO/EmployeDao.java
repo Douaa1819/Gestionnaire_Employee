@@ -1,6 +1,6 @@
-package employeemanagement.DAO.interfaces;
+package com.employeemanagement.DAO;
 
-import employeemanagement.entities.Employee;
+import com.employeemanagement.entities.Employee;
 import java.util.List;
 
 public interface EmployeDao {

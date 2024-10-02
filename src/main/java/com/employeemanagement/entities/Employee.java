@@ -1,9 +1,8 @@
-package employeemanagement.entities;
-import java.util.UUID;
+package com.employeemanagement.entities;
 
 public class Employee {
 
-    private UUID id;
+    private Long id;
     private String name;
     private String email;
     private String phone;
@@ -21,11 +20,21 @@ public class Employee {
         this.position = position;
     }
 
-    public UUID getId() {
+
+    public Employee( Long id,String name, String email, String phone, String department, String position) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.department = department;
+        this.position = position;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -67,5 +76,11 @@ public class Employee {
 
     public void setPosition(String position) {
         this.position = position;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Employee [name=" + name + ", email=" + email + ", phone=" + phone + ", department=" + department + ", position=" + position + "]";
     }
 }
