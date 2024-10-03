@@ -1,30 +1,49 @@
-
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Ajouter ou Modifier un Employé</title>
+    <title>Gestion des Employés</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <form action="employees" method="post">
-        <input type="hidden" name="id">
 
-        <label >Nom :</label>
-        <input type="text" name="name" value="" required><br>
+<nav class="navbar">
+    <div class="container">
+        <h1 class="logo">Gestion des Employés</h1>
+        <ul class="nav-links">
+            <li><a href="employees">Accueil</a></li>
+            <li><a href="employee-add.jsp">Ajouter Employé</a></li>
+        </ul>
+    </div>
+</nav>
 
-        <label >Email :</label>
-        <input type="email" name="email" value="" required><br>
+<div class="container">
+    <h2>Liste des Employés</h2>
+    <table class="employee-table">
+        <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Email</th>
+            <th>Téléphone</th>
+            <th>Département</th>
+            <th>Poste</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach var="employee" items="${employees}">
+            <tr>
+                <td>${employee.id}</td>
+                <td>${employee.name}</td>
+                <td>${employee.email}</td>
+                <td>${employee.phone}</td>
+                <td>${employee.department}</td>
+                <td>${employee.position}</td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
+</div>
 
-        <label >Téléphone :</label>
-        <input type="text" name="phone" value="" required><br>
-
-        <label >Département :</label>
-        <input type="text" name="department" value="" required><br>
-
-        <label >Poste :</label>
-        <input type="text" name="position" value="" required><br>
-
-        <input type="submit" value="Enregistrer">
-    </form>
-    <a href="employees">Retour à la liste</a>
 </body>
 </html>

@@ -5,8 +5,10 @@ import java.util.List;
 
 public interface EmployeDao {
     void saveEmploye(Employee employee);
-    void updateEmployee(Employee employee);
-    void deleteEmployee(Employee employee);
+    void updateEmployee(Long id,Employee employee);
+    void deleteEmployee(Long id);
     List<Employee> getListEmployes();
+    Employee getEmployee(Long id);
+    List<Employee> filterEmployees(String position,String department);
 
 }

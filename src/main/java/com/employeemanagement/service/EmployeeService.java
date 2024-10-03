@@ -22,12 +22,12 @@ public class EmployeeService {
     }
 
 
-    public void updateEmployee(Employee employee) {
-        employeeDAO.updateEmployee(employee);
+    public void updateEmployee(Long id,Employee employee) {
+        employeeDAO.updateEmployee(id,employee);
     }
 
 
-    public void deleteEmployee(Employee employee) {
-        employeeDAO.deleteEmployee(employee);
+    public void deleteEmployee(Long id) {
+        employeeDAO.deleteEmployee(id);
     }
 }
