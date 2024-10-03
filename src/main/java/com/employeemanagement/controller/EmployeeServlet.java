@@ -24,35 +24,65 @@ public class EmployeeServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getParameter("action");
 
-        List<Employee> employees = employeeService.getAllEmployees();
-        request.setAttribute("employees", employees);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("Home.jsp");
-        dispatcher.forward(request, response);
+        if ("modifier".equals(action)) {
+            Long id = Long.valueOf(request.getParameter("id"));
+            Employee employee = employeeService.getEmployee(id);
+            request.setAttribute("employee", employee);
+
+            RequestDispatcher dispatcher = request.getRequestDispatcher("employee-edit.jsp");
+            dispatcher.forward(request, response);
+        } else {
+            List<Employee> employees = employeeService.getAllEmployees();
+            request.setAttribute("employees", employees);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("Home.jsp");
+            dispatcher.forward(request, response);
+        }
     }
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-      String name = request.getParameter("name");
-      String email = request.getParameter("email");
-      String phone = request.getParameter("phone");
-      String department = request.getParameter("department");
-      String position = request.getParameter("position");
+        String action = request.getParameter("action");
 
-      Employee employee = new Employee(name, email, phone, department, position);
-        try {
-            employeeService.addEmployee(employee);
+        if ("supprimer".equals(action)) {
+            Long id = Long.valueOf(request.getParameter("id"));
+            employeeService.deleteEmployee(id);
+            request.getSession().setAttribute("successMessage", "L'employé a été supprimé avec succès !");
+            response.sendRedirect("/Gestionnaire_Employee");
+        } else if ("mettreÀJour".equals(action)) {
+            Long id = Long.valueOf(request.getParameter("id"));
+            String name = request.getParameter("name");
+            String email = request.getParameter("email");
+            String phone = request.getParameter("phone");
+            String department = request.getParameter("department");
+            String position = request.getParameter("position");
 
-            request.getSession().setAttribute("successMessage", "L'employé a été ajouté avec succès !");
-        } catch (Exception e) {
+            Employee employee = new Employee(name, email, phone, department, position);
+            employeeService.updateEmployee(id, employee);
 
-            request.getSession().setAttribute("errorMessage", "Erreur lors de l'ajout de l'employé. Veuillez réessayer.");
+            request.getSession().setAttribute("successMessage", "L'employé a été mis à jour avec succès !");
+            response.sendRedirect("/Gestionnaire_Employee");
+        } else if ("ajouter".equals(action)) {
+            String name = request.getParameter("name");
+            String email = request.getParameter("email");
+            String phone = request.getParameter("phone");
+            String department = request.getParameter("department");
+            String position = request.getParameter("position");
+
+            Employee employee = new Employee(name, email, phone, department, position);
+            try {
+                employeeService.addEmployee(employee);
+                request.getSession().setAttribute("successMessage", "L'employé a été ajouté avec succès !");
+            } catch (Exception e) {
+                request.getSession().setAttribute("errorMessage", "Erreur lors de l'ajout de l'employé. Veuillez réessayer.");
+            }
+            response.sendRedirect("/Gestionnaire_Employee");
         }
-        response.sendRedirect("/Gestionnaire_Employee");
     }
 
 
 
-    }
+
+}
 
 

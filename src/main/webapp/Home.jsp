@@ -53,10 +53,11 @@
         <td>${employee.department}</td>
         <td>${employee.position}</td>
         <td>
-          <a href="editEmployee.jsp?id=${employee.id}" class="btn edit-btn">Modifier</a>
-          <form action="deleteEmployee" method="post" style="display:inline;">
+          <a href="${pageContext.request.contextPath}/Gestionnaire_Employee?action=modifier&id=${employee.id}" class="btn edit-btn">Modifier</a>
+          <form action="${pageContext.request.contextPath}/Gestionnaire_Employee" method="post" style="display:inline;">
+            <input type="hidden" name="action" value="supprimer">
             <input type="hidden" name="id" value="${employee.id}">
-            <button class="btn delete-btn">Supprimer</button>
+            <button type="submit" class="btn delete-btn">Supprimer</button>
           </form>
         </td>
       </tr>
