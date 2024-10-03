@@ -20,7 +20,8 @@
 <div class="container">
     <div class="form-container">
         <h2>Ajouter un Employe</h2>
-        <form action="Gestionnaire_Employee" method="post">
+        <form action="${pageContext.request.contextPath}/Gestionnaire_Employee" method="post">
+            <input type="hidden" name="action" value="ajouter">
             <label for="name">Nom :</label>
             <input type="text" id="name" name="name" placeholder="Entrez le nom" required>
 
