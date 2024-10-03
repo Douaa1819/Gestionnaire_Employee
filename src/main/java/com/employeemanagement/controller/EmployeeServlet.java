@@ -49,20 +49,28 @@ public class EmployeeServlet extends HttpServlet {
             employeeService.deleteEmployee(id);
             request.getSession().setAttribute("successMessage", "L'employé a été supprimé avec succès !");
             response.sendRedirect("/Gestionnaire_Employee");
-        } else if ("mettreÀJour".equals(action)) {
-            Long id = Long.valueOf(request.getParameter("id"));
-            String name = request.getParameter("name");
-            String email = request.getParameter("email");
-            String phone = request.getParameter("phone");
-            String department = request.getParameter("department");
-            String position = request.getParameter("position");
+        }else if ("edit".equals(action)) {
+            try {
+                Long id = Long.valueOf(request.getParameter("id"));
+                String name = request.getParameter("name");
+                String email = request.getParameter("email");
+                String phone = request.getParameter("phone");
+                String department = request.getParameter("department");
+                String position = request.getParameter("position");
 
-            Employee employee = new Employee(name, email, phone, department, position);
-            employeeService.updateEmployee(id, employee);
+                Employee employee = new Employee(name, email, phone, department, position);
+                employeeService.updateEmployee(id, employee);
 
-            request.getSession().setAttribute("successMessage", "L'employé a été mis à jour avec succès !");
-            response.sendRedirect("/Gestionnaire_Employee");
-        } else if ("ajouter".equals(action)) {
+                request.getSession().setAttribute("successMessage", "L'employé a été mis à jour avec succès !");
+                response.sendRedirect(request.getContextPath() + "/edit");
+            } catch (Exception e) {
+                e.printStackTrace();
+                request.getSession().setAttribute("errorMessage", "Erreur lors de la mise à jour de l'employé. Veuillez réessayer.");
+                response.sendRedirect(request.getContextPath() + "/Gestionnaire_Employee");
+            }
+        }
+
+        else if ("ajouter".equals(action)) {
             String name = request.getParameter("name");
             String email = request.getParameter("email");
             String phone = request.getParameter("phone");
