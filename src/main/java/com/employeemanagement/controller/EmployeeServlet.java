@@ -2,6 +2,7 @@ package com.employeemanagement.controller;
 
 import com.employeemanagement.DAO.EmployeeDaoImpl;
 import com.employeemanagement.entities.Employee;
+import com.employeemanagement.service.EmployeeService;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -13,35 +14,45 @@ import java.util.List;
 
 public class EmployeeServlet extends HttpServlet {
 
-    private EmployeeDaoImpl employeeDao;
+    private EmployeeService employeeService;
 
     @Override
     public void init() throws ServletException {
-        employeeDao = new EmployeeDaoImpl();
+        EmployeeDaoImpl employeeDao = new EmployeeDaoImpl();
+        employeeService = new EmployeeService(employeeDao);
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Employee> employees = employeeDao.getListEmployes();
+
+        List<Employee> employees = employeeService.getAllEmployees();
         request.setAttribute("employees", employees);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("Home.jsp");
         dispatcher.forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-      String nom = request.getParameter("nom");
-      String phone = request.getParameter("phone");
-      String departement = request.getParameter("departement");
+      String name = request.getParameter("name");
       String email = request.getParameter("email");
+      String phone = request.getParameter("phone");
+      String department = request.getParameter("department");
       String position = request.getParameter("position");
-      Employee employee = new Employee(nom, phone, departement, email, position);
-      employeeDao.saveEmploye(employee);
-      response.sendRedirect("employees");
+
+      Employee employee = new Employee(name, email, phone, department, position);
+        try {
+            employeeService.addEmployee(employee);
+
+            request.getSession().setAttribute("successMessage", "L'employé a été ajouté avec succès !");
+        } catch (Exception e) {
+
+            request.getSession().setAttribute("errorMessage", "Erreur lors de l'ajout de l'employé. Veuillez réessayer.");
+        }
+        response.sendRedirect("/Gestionnaire_Employee");
+    }
 
 
 
     }
 
 
-}

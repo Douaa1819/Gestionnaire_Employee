@@ -32,13 +32,12 @@ body {
     color: #ffffff;
     text-decoration: none;
     font-weight: bold;
+    background-color: #333333;
+    border-radius: 5px;
     padding: 10px;
 }
 
-.nav-links a:hover {
-    background-color: #333333;
-    border-radius: 5px;
-}
+
 
 .container {
     width: 90%;
@@ -72,8 +71,8 @@ body {
 .btn {
     padding: 10px 15px;
     color: #ffffff;
-    background-color: #007bff;
     border: none;
+
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -81,6 +80,7 @@ body {
 
 .btn.edit-btn {
     background-color: #28a745;
+    text-decoration: none;
 }
 
 .btn.delete-btn {
@@ -90,3 +90,24 @@ body {
 .btn:hover {
     background-color: #0056b3;
 }
+
+
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.alert-success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+}
+
+.alert-danger {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}
+

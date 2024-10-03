@@ -10,9 +10,9 @@ public class Test {
     public static void main(String[] args){
        EmployeeDaoImpl employeeDao =new EmployeeDaoImpl();
 //
-//        Employee employee = new Employee("goufrane","hafsaa@gmail.com","0630000757","safi","prof");
+//       Employee employee = new Employee("hhhhhhhhh","hafsaa@gmail.com","0630000757","safi","prof");
 //
-//
+//        employeeDao.saveEmploye(employee);
 //        //test pour enregistrer employee en base de donner
 //        employeDao.deleteEmployee(302L);
 //

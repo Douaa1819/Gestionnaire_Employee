@@ -104,15 +104,35 @@ public Employee getEmployee(Long id) {
     return null;
 }
 
+
     @Override
-   public List<Employee> filterEmployees(String position, String department) {
-//
-//        return employees.stream()
-//                .filter(employee -> (position == null  position.isEmpty()
-//                        employee.getPosition().equalsIgnoreCase(position)) &&
-//                (department == null  department.isEmpty()
-//        employee.getDepartment().equalsIgnoreCase(department)))
-//                .collect(Collectors.toList());
-    return null;}
+    public List<Employee> filterEmployees(String position, String department) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            String queryString = "FROM Employee e WHERE e.position = :position AND e.department = :department";
+            return session.createQuery(queryString, Employee.class)
+                    .setParameter("position", position)
+                    .setParameter("department", department)
+                    .list();
+        } catch (Exception e) {
+            System.err.println("Erreur lors du filtrage des employés : " + e.getMessage());
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+
+
+
+    public List<Employee> searchEmployees(String keyword) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            String queryString = "FROM Employee e WHERE e.name LIKE :keyword OR e.email LIKE :keyword";
+            return session.createQuery(queryString, Employee.class)
+                    .setParameter("keyword", "%" + keyword + "%")
+                    .list();
+        } catch (Exception e) {
+            System.err.println("Erreur lors de la recherche des employés : " + e.getMessage());
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
 
 }

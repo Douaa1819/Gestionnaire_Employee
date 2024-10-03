@@ -30,4 +30,8 @@ public class EmployeeService {
     public void deleteEmployee(Long id) {
         employeeDAO.deleteEmployee(id);
     }
+
+    public Employee getEmployee(Long id) {
+        return employeeDAO.getEmployee(id);
+    }
 }
