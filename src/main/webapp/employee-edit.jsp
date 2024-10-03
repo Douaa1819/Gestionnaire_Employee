@@ -20,8 +20,8 @@
 <div class="container">
     <div class="form-container">
         <h2>Modifier un Employe</h2>
-        <form action="${pageContext.request.contextPath}/Gestionnaire_Employee" method="post">
-            <input type="hidden" name="action" value="mettreÀJour">
+        <form action="${pageContext.request.contextPath}/" method="post">
+        <input type="hidden" name="action" value="edit">
             <input type="hidden" name="id" value="${employee.id}">
             <label >Nom:</label>
             <input type="text" name="name" value="${employee.name}" required>
