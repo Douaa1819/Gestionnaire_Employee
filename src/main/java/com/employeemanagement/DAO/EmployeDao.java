@@ -10,5 +10,6 @@ public interface EmployeDao {
     List<Employee> getListEmployes();
     Employee getEmployee(Long id);
     List<Employee> filterEmployees(String position,String department);
+    List<Employee> searchEmployees(String keyword);
 
 }

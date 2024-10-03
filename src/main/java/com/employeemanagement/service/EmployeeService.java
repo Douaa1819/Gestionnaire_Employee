@@ -34,4 +34,13 @@ public class EmployeeService {
     public Employee getEmployee(Long id) {
         return employeeDAO.getEmployee(id);
     }
+
+    public List<Employee> filterEmployees(String position,String department){
+      return employeeDAO.filterEmployees(position,department);
+
+    }
+    public List<Employee> searchEmployees(String Key){
+
+        return employeeDAO.searchEmployees(Key);
+    }
 }
