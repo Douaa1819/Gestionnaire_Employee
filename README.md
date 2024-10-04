@@ -25,10 +25,11 @@ The project is based on **MVC** architecture:
 
 This project is licensed under the MIT License.
 
-### 📊 Presentation 
+### 📊 Presentation
 
-[Click here to view the presentation  project]([(https://www.canva.com/design/DAGSP4Ce82w/_UKGB7K__KWdkqt-t04pGA/edit]
-
+[Click here to view the project presentation](https://www.canva.com/design/DAGSP4Ce82w/_UKGB7K__KWdkqt-t04pGA/edit)
 
 ### 📄 Planning
-[Click here to view the project planning]([https://douaa123.atlassian.net/jira/software/c/projects/EM/boards/9/backlog] 
+
+[Click here to view the project planning](https://douaa123.atlassian.net/jira/software/c/projects/EM/boards/9/backlog)
+
