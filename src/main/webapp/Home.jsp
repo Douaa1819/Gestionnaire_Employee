@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <html>
 <head>
   <title>Gestion des Employés</title>
@@ -8,21 +9,20 @@
 </head>
 <body>
 
-<nav class="navbar">
-  <div class="container">
-    <a href="/" class="logo"><i class="fas fa-users"></i> Gestion Employés</a>
-    <ul class="nav-links">
-      <li><a href="/Gestionnaire_Employee">Accueil</a></li>
-      <li><a href="employee-add.jsp">Ajouter Employé</a></li>
-    </ul>
-  </div>
-</nav>
+
+<jsp:include page="navbar.jsp" />
 
 <div class="container">
+  <ul class="nav-links">
+    <li>
+      <a href="employee-add.jsp" class="add-employee-btn">
+        <i class="fas fa-plus"></i> Ajouter Employé
+      </a>
+    </li>
+  </ul>
   <div class="search-filter">
-    <form method="get" action="/Gestionnaire_Employee">
+    <form method="get" action="/Gestionnaire_Employee" class="filter-form">
       <input type="text" class="search-box" name="search" placeholder="Rechercher un employé..." value="${param.search}">
-      <button type="submit" class="search-box fa fa-search"></button>
 
       <select class="filter-select" name="department">
         <option value="">Filtrer par Département</option>
@@ -37,7 +37,6 @@
           <option value="${pos}" ${param.position == pos ? 'selected' : ''}>${pos}</option>
         </c:forEach>
       </select>
-
 
       <button type="submit" class="btn search-btn">Filtrer</button>
     </form>
@@ -59,11 +58,6 @@
     <div class="alert alert-warning">
         ${message}
     </div>
-  </c:if>
-
-  <h2>Liste des Employés</h2>
-  <c:if test="${not empty message}">
-    <div>${message}</div>
   </c:if>
 
   <table class="employee-table">
@@ -99,9 +93,9 @@
   </table>
 </div>
 
-
 </body>
 </html>
+
 
 <style>
   body {
@@ -114,19 +108,18 @@
 
   .navbar {
     background-color: #1f1f1f;
-    padding: 15px 0;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: center;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
   }
 
   .navbar .container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    width: 90%;
-    margin: 0 auto;
+    width: 100%;
+
+    max-width: 1200px;
   }
 
   .navbar .logo {
@@ -145,30 +138,33 @@
   .nav-links {
     list-style: none;
     display: flex;
+
+    justify-content: flex-end;
+    margin-top: 10px;
   }
 
   .nav-links li {
-    margin-left: 20px;
+    margin-bottom: 15px;
   }
 
-  .nav-links a {
+  .add-employee-btn {
     color: #ffffff;
     text-decoration: none;
     font-weight: bold;
     padding: 10px 15px;
-    background-color: #333333;
+    background-color: #28a745;
     border-radius: 5px;
-    transition: background-color 0.3s ease;
   }
 
-  .nav-links a:hover {
-    background-color: #444444;
+  .add-employee-btn:hover {
+    background-color: #000000;
   }
 
   .container {
     width: 90%;
-    margin: 50px auto;
+    margin: 10px  15px auto auto;
     background-color: #1a1a1a;
+
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
@@ -176,17 +172,33 @@
 
   .search-filter {
     display: flex;
-    justify-content: space-between;
+    align-items: center;
     margin-bottom: 20px;
+    gap: 20px;
+  }
+
+  .filter-form {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
   }
 
   .search-box, .filter-select {
     padding: 10px;
-    width: 30%;
     border: 1px solid #333333;
     border-radius: 5px;
     background-color: #333333;
     color: #ffffff;
+    flex-grow: 1;
+  }
+
+  .search-box {
+    margin-right: 20px;
+  }
+
+  .filter-select {
+    margin-right: 20px;
+    width: 200px;
   }
 
   .btn.search-btn {
@@ -196,10 +208,12 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    margin-left: 5px;
   }
 
   .employee-table {
     width: 100%;
+    border-radius: 10px;
     border-collapse: collapse;
   }
 
@@ -215,6 +229,7 @@
 
   .employee-table tr:hover {
     background-color: #252525;
+    box-shadow: 0px 5px 18px rgba(0, 0, 0, 0.5);
   }
 
   .btn {
@@ -238,8 +253,19 @@
     margin-right: 5px;
   }
 
-  .btn:hover {
-    background-color: #0056b3;
+  .edit-btn {
+    background-color: #28a745;
+  }
+  .edit-btn:hover {
+    background-color: #000000;
+  }
+
+  .delete-btn {
+    background-color: #dc3545;
+  }
+
+  .delete-btn:hover {
+    background-color: #000000;
   }
 
   .alert {
@@ -257,4 +283,5 @@
     background-color: #f2dede;
     color: #a94442;
   }
+
 </style>
