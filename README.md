@@ -2,13 +2,13 @@
 
 This project is a simple web application for managing employees, built using **Java EE** and **Hibernate**. It allows for basic employee CRUD operations and follows the **MVC architecture** with well-defined DAO and service layers.
 
-
-
 ### 🛠️ Technologies Used
 
 - **Java EE** (JSP, Servlets)
 - **Hibernate** ORM for database interactions
 - **PostgreSQL** for data storage
+- **Tomcat 10** as the web server
+- **Maven** for dependency management
 - **MVC architecture** for modular code organization
 - **DAO** and **Service** layers
 
@@ -21,6 +21,10 @@ The project is based on **MVC** architecture:
 - **DAO Layer**: Data access via Hibernate.
 - **Service Layer**: Business logic and data management.
 
+### 🖼️ User Interface Example
+![UI Screenshot](![9d824749-8618-46aa-8e4a-1832b1b9352c](https://github.com/user-attachments/assets/69946103-af90-4089-aeed-96d80a54e90e)
+)
+
 ### 📄 License
 
 This project is licensed under the MIT License.
@@ -32,4 +36,3 @@ This project is licensed under the MIT License.
 ### 📄 Planning
 
 [Click here to view the project planning](https://douaa123.atlassian.net/jira/software/c/projects/EM/boards/9/backlog)
-
