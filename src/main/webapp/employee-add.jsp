@@ -1,21 +1,14 @@
 
+
 <html>
 <head>
-    <title>Ajouter ou Modifier un Employe</title>
+    <title>Ajouter  un Employe</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
-<nav class="navbar">
-    <div class="container">
-        <h1 class="logo">Gestion des Employes</h1>
-        <ul class="nav-links">
-            <li><a href="/Gestionnaire_Employee">Accueil</a></li>
-            <li><a href="employee-add.jsp">Ajouter Employe</a></li>
-        </ul>
-    </div>
-</nav>
+<jsp:include page="navbar.jsp" />
 
 <div class="container">
     <div class="form-container">
@@ -56,43 +49,9 @@
         padding: 0;
     }
 
-    .navbar {
-        background-color: #1f1f1f;
-        padding: 20px;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-    }
 
-    .navbar .logo {
-        color: #ffffff;
-        font-size: 24px;
-        font-weight: bold;
-    }
 
-    .nav-links {
-        list-style: none;
-        display: flex;
-        margin: 0;
-    }
 
-    .nav-links li {
-        margin-left: 20px;
-    }
-
-    .nav-links a {
-        color: #ffffff;
-        text-decoration: none;
-        font-weight: bold;
-        padding: 10px 20px;
-        background-color: #333333;
-        border-radius: 25px;
-        transition: background-color 0.3s ease;
-    }
-
-    .nav-links a:hover {
-        background-color: #007bff;
-    }
-
-    /* Formulaire */
     .form-container {
         background-color: #1a1a1a;
         width: 100%;
@@ -147,7 +106,7 @@
         background-color: #0056b3;
     }
 
-    /* Bouton Retour */
+
     .back-btn {
         text-align: center;
         margin-top: 20px;

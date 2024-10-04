@@ -1,21 +1,12 @@
 
 <html>
 <head>
-    <title>Ajouter ou Modifier un Employe</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
-<nav class="navbar">
-    <div class="container">
-        <h1 class="logo">Gestion des Employes</h1>
-        <ul class="nav-links">
-            <li><a href="/Gestionnaire_Employee">Accueil</a></li>
-            <li><a href="employee-add.jsp">Ajouter Employe</a></li>
-        </ul>
-    </div>
-</nav>
+<jsp:include page="navbar.jsp" />
 
 <div class="container">
     <div class="form-container">
@@ -33,7 +24,9 @@
             <input type="text" name="department" value="${employee.department}" required>
             <label >Poste:</label>
             <input type="text" name="position" value="${employee.position}" required>
-            <button type="submit" class="edit-btn">Mettre a jour</button>
+
+            <input type="submit" value="Mettre a jour">
+
         </form>
         <div class="back-btn">
             <a href="/Gestionnaire_Employee">Retour a la liste des employes</a>
@@ -129,7 +122,7 @@
     .form-container input[type="submit"] {
         width: 100%;
         padding: 15px;
-        background-color: #007bff;
+        background-color: #17ac17;
         color: #fff;
         font-size: 18px;
         font-weight: bold;
@@ -140,7 +133,7 @@
     }
 
     .form-container input[type="submit"]:hover {
-        background-color: #0056b3;
+        background-color: black;
     }
 
     /* Bouton Retour */
