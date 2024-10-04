@@ -25,7 +25,10 @@ public class EmployeeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
-
+        List<String> departments = employeeService.getDistinctDepartments();
+        List<String> positions = employeeService.getDistinctPositions();
+        request.setAttribute("departments", departments);
+        request.setAttribute("positions", positions);
         if ("modifier".equals(action)) {
             Long id = Long.valueOf(request.getParameter("id"));
             Employee employee = employeeService.getEmployee(id);
@@ -34,7 +37,21 @@ public class EmployeeServlet extends HttpServlet {
             RequestDispatcher dispatcher = request.getRequestDispatcher("employee-edit.jsp");
             dispatcher.forward(request, response);
         } else {
-            List<Employee> employees = employeeService.getAllEmployees();
+            List<Employee> employees;
+            String search = request.getParameter("search");
+            String department = request.getParameter("department");
+            String position = request.getParameter("position");
+
+            if (search != null && !search.isEmpty()) {
+                employees = employeeService.searchEmployees(search);
+                request.setAttribute("message", employees.isEmpty() ? "Aucun employé trouvé avec ce mot-clé." : "");
+            } else if ((department != null && !department.isEmpty()) || (position != null && !position.isEmpty())) {
+                employees = employeeService.filterEmployees(department, position);
+                request.setAttribute("message", employees.isEmpty() ? "Aucun employé trouvé." : "");
+            } else {
+                employees = employeeService.getAllEmployees();
+            }
+
             request.setAttribute("employees", employees);
             RequestDispatcher dispatcher = request.getRequestDispatcher("Home.jsp");
             dispatcher.forward(request, response);

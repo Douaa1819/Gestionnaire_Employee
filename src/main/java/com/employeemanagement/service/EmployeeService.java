@@ -43,4 +43,11 @@ public class EmployeeService {
 
         return employeeDAO.searchEmployees(Key);
     }
+
+    public List<String> getDistinctDepartments(){
+        return employeeDAO.getDistinctDepartments();
+    }
+    public List <String> getDistinctPositions(){
+        return employeeDAO.getDistinctPositions();
+}
 }

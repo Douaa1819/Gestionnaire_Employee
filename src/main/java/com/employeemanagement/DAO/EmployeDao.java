@@ -11,5 +11,7 @@ public interface EmployeDao {
     Employee getEmployee(Long id);
     List<Employee> filterEmployees(String position,String department);
     List<Employee> searchEmployees(String keyword);
+    List<String> getDistinctPositions();
+    List<String> getDistinctDepartments();
 
 }
