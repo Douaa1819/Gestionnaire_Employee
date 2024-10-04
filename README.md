@@ -22,7 +22,7 @@ The project is based on **MVC** architecture:
 - **Service Layer**: Business logic and data management.
 
 ### 🖼️ User Interface Example
-[9d824749-8618-46aa-8e4a-1832b1b9352c](https://github.com/user-attachments/assets/0b6edfc2-0398-4754-a7af-c7d72f2a58b2)
+![UI Screenshot]([9d824749-8618-46aa-8e4a-1832b1b9352c](https://github.com/user-attachments/assets/0b6edfc2-0398-4754-a7af-c7d72f2a58b2))
 
 
 ### 📄 License
